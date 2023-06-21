@@ -1,0 +1,122 @@
+stories:
+  - story: happy path
+    steps:
+      - intent: welcome
+      - action: utter_greet
+  
+  - story: thanks
+    steps:
+      - intent: thanks
+      - action: utter_no_problem
+
+#   - story: build confirm
+#     steps:
+#       - intent: build
+#       - action: action_build
+#       - intent: confirm
+#       - action: action_deploy
+
+  # - story: detect feature
+  #   steps:
+  #     - intent: detect
+  #     - action: utter_on_it
+  #     - action: action_detect
+
+#   - story: query exist
+#     steps:
+#       - intent: query_exists
+#       - action: utter_let_me_check
+#       - action: action_query_exists
+##       - action: utter_ask_for_feedback # want to confirm query and print results
+
+  - story: query
+    steps:
+      - intent: query
+      - action: utter_let_me_check
+      - action: action_query
+
+  - story: modify query
+    steps:
+      - intent: modify
+      - action: utter_let_me_check
+      - action: action_modify
+
+  - story: compare query
+    steps:
+      - intent: compare
+      - action: utter_please_wait
+      - action: action_compare
+
+  - story: find
+    steps:
+      - intent: find
+      - action: utter_let_me_check
+      - action: action_find
+
+  - story: infer
+    steps:
+      - intent: infer
+      - action: utter_let_me_check
+      - action: action_infer
+  
+  - story: define labeling function
+    steps:
+      - intent: define
+      - action: utter_let_me_check
+      - action: action_define
+  
+  - story: fallback
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+  
+  - story: refresh cache
+    steps:
+      - intent: refresh
+      - action: utter_let_me_check
+      - action: action_refresh
+  
+  - story: pentest
+    steps:
+      - intent: pentest
+      - action: action_pentest
+      - intent: compare
+      - action: action_compare
+      - intent: infer
+      - action: action_infer
+      
+#   - story: build with feedback
+#     steps:
+#       - intent: build
+#       - action: action_build
+#       - intent: reject
+#       - action: utter_ask_for_feedback
+#       - active_loop: feedback_form
+#       - slot_was_set:
+#           - requested_slot: entity
+#       - slot_was_set:
+#           - requested_slot: value
+#       - slot_was_set:
+#           - requested_slot: null
+#       - active_loop: null
+#       - action: action_feedback
+#       - intent: confirm
+#       - action: action_feedback_confirm
+
+#   - story: build and feedback rejected
+#     steps:
+#       - intent: build
+#       - action: action_build
+#       - intent: reject
+#       - action: utter_ask_for_feedback
+#       - active_loop: feedback_form
+#       - slot_was_set:
+#           - requested_slot: entity
+#       - slot_was_set:
+#           - requested_slot: value
+#       - slot_was_set:
+#           - requested_slot: null
+#       - active_loop: null
+#       - action: action_feedback
+#       - intent: reject
+#       - action: utter_start_over

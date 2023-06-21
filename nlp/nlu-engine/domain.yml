@@ -1,0 +1,141 @@
+version: "2.0"
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+  - welcome:
+      use_entities: true
+  - thanks:
+      use_entities: true
+  - out_of_scope:
+      use_entities: false
+  - goodbye:
+      use_entities: true
+  - cancel:
+      use_entities: true
+  - confirm:
+      use_entities: true
+  - reject:
+      use_entities: true
+  # - build:
+  #     use_entities: true
+  # - build-feedback:
+  #     use_entities: true
+  # - detect:
+  #     use_entities: true
+  # - query_exists:
+  #     use_entities: true
+  - modify:
+      use_entities: true
+  - compare:
+      use_entities: true
+  - query:
+      use_entities: true
+  - find:
+      use_entities: true
+  - infer:
+      use_entities: true
+  - define:
+      use_entities: true
+  - refresh:
+      use_entities: true
+  - pentest:
+      use_entities: true
+entities:
+  - host
+  - subtask
+  - window
+  - date
+  - entity
+  - qualifier
+  - value
+  - operation
+  - target
+  - origin
+  - destination
+  - protocol
+  - service
+  - traffic
+  - group
+  - middlebox
+  - start
+  - end
+  - qos_metric
+  - qos_unit
+  - qos_value
+  - qos_constraint
+  - location
+  - time
+slots:
+  entity:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+      - group
+      - location
+      - middlebox
+      - service
+      - traffic
+      - protocol
+  value:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+responses:
+  utter_greet:
+    - text: Hi! How can I help you?
+  utter_thank_you:
+    - image: https://i.imgur.com/nGF1K8f.jpg
+      text: "Here is something to cheer you up:"
+  utter_did_that_help:
+    - text: Did that help you?
+  utter_happy:
+    - text: Great, carry on!
+  utter_no_problem:
+    - text: No problem! Happy to help.
+  utter_on_it:
+    - text: I'm on it.
+  utter_goodbye:
+    - text: Bye!
+  utter_let_me_check:
+    - text: Let me check...
+  utter_what_i_found:
+    - text: Here's what I found.
+  utter_please_wait:
+    - text: One moment, please.
+  utter_ask_for_feedback:
+    - text: Hmm, okay. What did I miss?
+  utter_start_over:
+    - text: Okay. Please start over then.
+  utter_confirm:
+    - text: How does this look?
+  utter_out_of_scope:
+    - text: Sorry, I don't think I'm equipped to answer that.
+actions:
+  # - action_feedback
+  # - action_feedback_confirm
+  # - action_deploy
+  - action_debug
+  # - action_detect
+  # - action_query_exists
+  - action_modify
+  - action_compare
+  - action_query
+  - action_find
+  - action_infer
+  - action_define
+  - action_refresh
+  - action_pentest
+forms:
+  feedback_form:
+    required_slots:
+      entity:
+        - type: from_text
+      value:
+        - type: from_text
+e2e_actions: []

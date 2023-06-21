@@ -1,0 +1,11 @@
+#!/bin/bash
+# see https://rasa.com/docs/rasa/tuning-your-model for GPU memory management
+export TF_FORCE_GPU_ALLOW_GROWTH=true
+export TF_GPU_MEMORY_ALLOC="0:512, 1:512, 2:2048"
+# rasa shell
+
+# To run via API (headless)
+# rasa run --enable-api --debug
+rasa run --enable-api --debug --cors "*" -m models
+# To send requests:
+# curl -XPOST localhost:5005/model/parse -d '{ "text": "Hey Lumi, please block traffic for all students." }'

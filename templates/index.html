@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ARISE NLP</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <!-- <script type="text/javascript" src="socket.io/socket.io.js"></script> -->
+    <link rel="stylesheet" href="static/main.css">
+    <!-- <link rel="text/javascript" href="static/socket.js"> -->
+    <script src="{{url_for('static', filename='socket.js')}}"></script>
+    <script type="text/javascript">
+        var showdebug = false;
+
+        // jQuery Document
+        $(document).ready(function () {
+            var toggle = false;
+            $("#debugToggleSwitch").click(function() {
+                // $("input[type=checkbox]").attr("checked", !toggle);
+                toggle = !toggle;
+
+                if (toggle) {
+                    $(".debug").css('display', 'block');
+                    // console.log("debug log enabled");
+                    showdebug = true;
+                } else {
+                    $(".debug").css('display', 'none');
+                    // console.log("debug log disabled");
+                    showdebug = false;
+                }
+            }); 
+
+
+            function displaydebug() {
+                if (showdebug) {
+                    $(".debug").css('display', 'block');
+                } else {
+                    $(".debug").css('display', 'none');
+                }
+            }
+
+            setInterval(displaydebug, 100);
+        }); // on document ready
+
+        
+
+        const API_URL = '/api';
+        const input = document.getElementById("query-input");
+        // var textarea = document.getElementById("chatlog");
+        
+
+        var helpMenu = document.createElement('div');
+        $(helpMenu).addClass('help menu').html(
+            // '<table style="border-collapse:collapse;border-spacing:0;margin:0px auto" class="tg"><thead><tr><th style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Command</th><th style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Effect</th></tr></thead><tbody><tr><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">/help</td><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Display this help menu.</td></tr><tr><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">/clear</td><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Clear the chat log.</td></tr><tr><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">/lorem</td><td style="border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Generate dummy text.</td></tr></tbody></table>'
+            '<table><thead><tr><th>Command&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Effect</th></tr></thead><tbody><tr><td>/help</td><td>Display this help menu.</td></tr><tr><td>/clear</td><td>Clear the chat log.</td></tr><tr><td>/lorem</td><td>Generate dummy text.</td></tr></tbody></table>'
+        );
+
+        
+        const handleResponse = ({ target }) => {
+            // this is where we handle the response we get from the flask backend
+
+            // enable input after response is received
+            $('#query-input').prop('disabled', false);
+            document.getElementById("query-input").focus();
+            
+            // append response to chatlog
+            console.debug(target);
+            $('#history').append(`<div class='response logtext'>${target.responseText}</div>`);
+
+            // scroll to bottom of chatlog
+            let log = document.getElementById("history");
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function send_query() {
+            if (event.keyCode === 13) { // enter keypress
+                event.preventDefault();
+
+                let querystring = $('#query-input').val().trim();
+
+                if (querystring === "") {
+                    // cancel if input is empty
+                    return;
+                } else if (querystring == "/clear") {
+                    $('#history').empty();
+                    $('#query-input').val("");
+                    return;
+                } else if (querystring == "/help") {
+                    // add user command; clear input textbox
+                    $('#history').append(`<div class='userinput logtext'>$ ${querystring}</div>`);
+                    $('#query-input').val("");
+                    
+                    // clone and append help menu
+                    $('#history').append($(helpMenu).clone());
+                    return;
+                }
+
+                const xhr = new XMLHttpRequest();
+                const data = new FormData();
+
+                data.append('input', querystring);
+                xhr.addEventListener('load', handleResponse);
+                xhr.open('POST', API_URL);
+                xhr.send(data);
+
+                // append to chatlog
+                // $('#chatlog').val($('#chatlog').val() + "\n>>> " + querystring);
+                $('#history').append(`<div class='userinput logtext'>${querystring}</div>`);
+
+                // clear input textbox
+                $('#query-input').val("");
+
+                // scroll to bottom of chatlog
+                let log = document.getElementById("history");
+                log.scrollTop = log.scrollHeight;
+
+                // disable input until response is received
+                $('#query-input').prop('disabled', true);
+            }
+        }
+        
+    </script>
+</head>
+
+<body>
+    <h1>Arise Conversational Security Interface</h1>
+    <div id="log">
+        <div id="history" class="textlogs scroll"></div>
+        <br />
+        <input type="text" id="query-input" autocomplete="off" autofocus="autofocus" class="textlogs" onkeyup="send_query()" placeholder="Type something here! Press Enter to submit. Use /help for more info."></input>
+    </div>
+
+    <div style="position: fixed; left: 10px; bottom: 10px;" id="debug-switch">
+        <label class="switch">
+            <input type="checkbox" id="debugToggleSwitch">
+            <span class="slider round" id="debugToggleSwitch"></span>
+        </label>
+    </div>
+</body>

@@ -1,0 +1,92 @@
+{
+    "text": "Disable firewall in the dorms.",
+    "intent": {
+        "id": -3247348206175151983,
+        "name": "build-feedback",
+        "confidence": 0.9423093199729919
+    },
+    "entities": [
+        {
+            "entity": "value",
+            "start": 8,
+            "end": 16,
+            "confidence_entity": 0.5109452605247498,
+            "value": "firewall",
+            "extractor": "DIETClassifier"
+        },
+        {
+            "start": 24,
+            "end": 29,
+            "confidence": 1.0,
+            "entity": "target",
+            "extractor": "CompositeEntityExtractor",
+            "value": [
+                {
+                    "entity": "location",
+                    "start": 24,
+                    "end": 29,
+                    "confidence_entity": 0.7288032174110413,
+                    "value": "dorms",
+                    "extractor": "DIETClassifier"
+                }
+            ]
+        }
+    ],
+    "intent_ranking": [
+        {
+            "id": -3247348206175151983,
+            "name": "build-feedback",
+            "confidence": 0.9423093199729919
+        },
+        {
+            "id": 2156323048037890039,
+            "name": "reject",
+            "confidence": 0.055001042783260345
+        },
+        {
+            "id": 7177525409510264723,
+            "name": "build",
+            "confidence": 0.0018694353057071567
+        },
+        {
+            "id": 6544858199624648678,
+            "name": "goodbye",
+            "confidence": 0.0005903257406316698
+        },
+        {
+            "id": -7095167342428128310,
+            "name": "cancel",
+            "confidence": 0.0001666307944105938
+        },
+        {
+            "id": 4341252371889271141,
+            "name": "welcome",
+            "confidence": 4.312576857046224e-05
+        },
+        {
+            "id": -8592076030174798757,
+            "name": "thanks",
+            "confidence": 1.737843376758974e-05
+        },
+        {
+            "id": -4179262149678445637,
+            "name": "confirm",
+            "confidence": 2.721873897826299e-06
+        }
+    ],
+    "response_selector": {
+        "all_retrieval_intents": [],
+        "default": {
+            "response": {
+                "id": null,
+                "responses": null,
+                "response_templates": null,
+                "confidence": 0.0,
+                "intent_response_key": null,
+                "utter_action": "utter_None",
+                "template_name": "utter_None"
+            },
+            "ranking": []
+        }
+    }
+}

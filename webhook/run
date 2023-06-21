@@ -1,0 +1,2 @@
+# poetry shell  # do this from base conda env
+rasa run actions --debug

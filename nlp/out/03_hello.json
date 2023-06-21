@@ -1,0 +1,66 @@
+{
+    "text": "Hello!",
+    "intent": {
+        "id": 4341252371889271141,
+        "name": "welcome",
+        "confidence": 0.9976338148117065
+    },
+    "entities": [],
+    "intent_ranking": [
+        {
+            "id": 4341252371889271141,
+            "name": "welcome",
+            "confidence": 0.9976338148117065
+        },
+        {
+            "id": -8592076030174798757,
+            "name": "thanks",
+            "confidence": 0.0018773500341922045
+        },
+        {
+            "id": -7095167342428128310,
+            "name": "cancel",
+            "confidence": 0.00038577921804971993
+        },
+        {
+            "id": -4179262149678445637,
+            "name": "confirm",
+            "confidence": 3.9353435568045825e-05
+        },
+        {
+            "id": -3247348206175151983,
+            "name": "build-feedback",
+            "confidence": 3.7830639485036954e-05
+        },
+        {
+            "id": 6544858199624648678,
+            "name": "goodbye",
+            "confidence": 1.6364234397769906e-05
+        },
+        {
+            "id": 7177525409510264723,
+            "name": "build",
+            "confidence": 5.620920546789421e-06
+        },
+        {
+            "id": 2156323048037890039,
+            "name": "reject",
+            "confidence": 3.9063929762050975e-06
+        }
+    ],
+    "response_selector": {
+        "all_retrieval_intents": [],
+        "default": {
+            "response": {
+                "id": null,
+                "responses": null,
+                "response_templates": null,
+                "confidence": 0.0,
+                "intent_response_key": null,
+                "utter_action": "utter_None",
+                "template_name": "utter_None"
+            },
+            "ranking": []
+        }
+    }
+}

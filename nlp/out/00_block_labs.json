@@ -1,0 +1,129 @@
+{
+    "text": "Block student traffic in the labs.",
+    "intent": {
+        "id": 4508185030806627260,
+        "name": "build",
+        "confidence": 1.0
+    },
+    "entities": [
+        {
+            "entity": "operation",
+            "start": 0,
+            "end": 5,
+            "confidence_entity": 0.9997774958610535,
+            "value": "Block",
+            "extractor": "DIETClassifier"
+        },
+        {
+            "start": 29,
+            "end": 33,
+            "confidence": 1.0,
+            "entity": "target",
+            "extractor": "CompositeEntityExtractor",
+            "value": [
+                {
+                    "entity": "location",
+                    "start": 29,
+                    "end": 33,
+                    "confidence_entity": 0.9688239693641663,
+                    "value": "labs",
+                    "extractor": "DIETClassifier"
+                }
+            ]
+        },
+        {
+            "start": 6,
+            "end": 13,
+            "confidence": 1.0,
+            "entity": "target",
+            "extractor": "CompositeEntityExtractor",
+            "value": [
+                {
+                    "entity": "location",
+                    "start": 6,
+                    "end": 13,
+                    "confidence_entity": 0.514316201210022,
+                    "value": "student",
+                    "extractor": "DIETClassifier"
+                }
+            ]
+        },
+        {
+            "start": 14,
+            "end": 21,
+            "confidence": 1.0,
+            "entity": "target",
+            "extractor": "CompositeEntityExtractor",
+            "value": [
+                {
+                    "entity": "traffic",
+                    "start": 14,
+                    "end": 21,
+                    "confidence_entity": 0.9259185194969177,
+                    "value": "all",
+                    "extractor": "DIETClassifier",
+                    "processors": [
+                        "EntitySynonymMapper"
+                    ]
+                }
+            ]
+        }
+    ],
+    "intent_ranking": [
+        {
+            "id": 4508185030806627260,
+            "name": "build",
+            "confidence": 1.0
+        },
+        {
+            "id": -3889748789873521989,
+            "name": "build-feedback",
+            "confidence": 1.0257222154974599e-10
+        },
+        {
+            "id": 3929409007770372708,
+            "name": "welcome",
+            "confidence": 4.676817960680424e-11
+        },
+        {
+            "id": -7438355690912831854,
+            "name": "cancel",
+            "confidence": 2.4671906878603878e-11
+        },
+        {
+            "id": -3326385117013063007,
+            "name": "thanks",
+            "confidence": 2.040934261871019e-11
+        },
+        {
+            "id": 3779281318573294132,
+            "name": "reject",
+            "confidence": 1.1466719934682956e-11
+        },
+        {
+            "id": -1160657454045010460,
+            "name": "goodbye",
+            "confidence": 1.1078032588485165e-11
+        },
+        {
+            "id": 1128711198446091817,
+            "name": "confirm",
+            "confidence": 4.4270983363611793e-13
+        }
+    ],
+    "response_selector": {
+        "all_retrieval_intents": [],
+        "default": {
+            "response": {
+                "id": null,
+                "responses": null,
+                "response_templates": null,
+                "confidence": 0.0,
+                "intent_response_key": null,
+                "utter_action": "utter_None",
+                "template_name": "utter_None"
+            },
+            "ranking": []
+        }
+    }
+}
